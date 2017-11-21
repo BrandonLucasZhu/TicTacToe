@@ -22,7 +22,7 @@
         <TableRow>
 
             <Button
-                android:id="@+id/b00"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
@@ -34,7 +34,7 @@
                 />
 
             <Button
-                android:id="@+id/b01"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
@@ -46,7 +46,7 @@
                 />
 
             <Button
-                android:id="@+id/b02"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
@@ -63,7 +63,7 @@
         <TableRow>
 
             <Button
-                android:id="@+id/b10"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
@@ -75,7 +75,7 @@
                 />
 
             <Button
-                android:id="@+id/b11"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
@@ -87,7 +87,7 @@
                 />
 
             <Button
-                android:id="@+id/b12"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
@@ -104,7 +104,7 @@
         <TableRow>
 
             <Button
-                android:id="@+id/b20"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
@@ -116,7 +116,7 @@
                 />
 
             <Button
-                android:id="@+id/b21"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
@@ -128,7 +128,7 @@
                 />
 
             <Button
-                android:id="@+id/b22"
+                android:id="@+id/b"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:textSize="22sp"
