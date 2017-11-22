@@ -2,6 +2,7 @@ package project.basic.brandonzhu.tictactoe;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.nfc.Tag;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
-
+    String addr_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 buttons[i][j].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // button 1 was clicked!
                         Context context = getApplicationContext();
-                        Toast.makeText(context,"Hello",1).show();
-                        // b.setVisibility(View.VISIBLE);
+                        //getResources().getResourceEntryName(v.getId())
+                        addr_button = getResources().getResourceEntryName(v.getId());
+                        //Log.i("hi",getResources().getResourceEntryName(v.getId()));
+                        //Toast.makeText(context,v.getId(),1).show();
+
                     }
                 });
             }
@@ -44,15 +49,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-       // new AlertDialog().Builder(this).setTitle("Info").setMessage(pressed).setNeutralButton("Okey", null).show();
-
-    public String getId(View view) {
-        if (view.getId() == 0xffffffff)
-            return "no-id";
-        else
-            return view.getResources().getResourceName(view.getId());
-    }
 
 
 
