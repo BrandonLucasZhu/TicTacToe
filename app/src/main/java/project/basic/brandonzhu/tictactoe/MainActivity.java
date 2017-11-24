@@ -29,19 +29,19 @@ public class MainActivity extends AppCompatActivity {
         //numb1.setOnClickListener(this);
 
        // String buttonText = b.getText().toString();
-        Button buttons[][] = new Button[3][3];
+        Button buttons[] = new Button[9];
 
-        for(int i=0; i<3; i++) {
-            for (int j = 0; j < 3; j++) {
-                String buttonID = "t" + i  + j;
+        for(int i=1; i<10; i++) { //Implement magic square
+           // for (int j = 0; j < 3; j++) {
+                String buttonID = "t" + i;
                 int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
-                buttons[i][j] = ((Button) findViewById(resID));
-                buttons[i][j].setOnClickListener(new View.OnClickListener() {
+                buttons[i] = ((Button) findViewById(resID));
+                buttons[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Context context = getApplicationContext();
                         //getResources().getResourceEntryName(v.getId())
-                        //addr_button = getResources().getResourceEntryName(v.getId());
+                        addr_button = getResources().getResourceEntryName(v.getId());
                         change_button(v.getId(),count);
                         save_id.add(v.getId());
                         count++;
@@ -49,13 +49,14 @@ public class MainActivity extends AppCompatActivity {
                             count=0;
                             reset(save_id);
                         }
+
+
                         //Log.i("hi",getResources().getResourceEntryName(v.getId()));
                         //Toast.makeText(context,v.getId(),1).show();
-
                     }
                 });
             }
-        }
+
     }
 
     private void reset (ArrayList<Integer> array_buttons) {
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             reset.setClickable(true);
         }
     }
+
+
 
 
     private void change_button(int idval, int oddeven){
@@ -79,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
             changePic.setBackgroundResource(R.drawable.molang_x);
             changePic.setClickable(false);
         }
-
 
     }
 
