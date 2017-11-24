@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private String addr_button;
     public int count;
     private ArrayList<Integer> save_id = new ArrayList<Integer>();
+    private int[] save_O = new int [9];
+    private int[] save_X = new int [9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         Context context = getApplicationContext();
                         //getResources().getResourceEntryName(v.getId())
                         addr_button = getResources().getResourceEntryName(v.getId());
-                        change_button(v.getId(),count);
+                        change_button(v.getId(),count,addr_button);
                         save_id.add(v.getId());
                         count++;
                         if (count>8){
@@ -50,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
                             reset(save_id);
                         }
 
+                        if (find3numbers(save_O)){
+                            Toast.makeText(context,"Winner",1).show();
+                        }
+                        else if (find3numbers(save_X)){
+                            Toast.makeText(context,"Winner",1).show();
+                        }
 
                         //Log.i("hi",getResources().getResourceEntryName(v.getId()));
                         //Toast.makeText(context,v.getId(),1).show();
@@ -68,19 +79,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private boolean find3numbers(int [] array_search ){
+        Arrays.sort(array_search);
+        int k = 15;
+        for(int first = 0; first < array_search.length()-2; first++) {
+            int second = first+1;
+            int third = array_search.size()-1;
+            int sum = k - array_search.get(first);
+            while(second < third) {
+                int currentSum = array_search.get(second) + array_search.get(third);
 
+                if(currentSum == sum) {
+                    return true;
+                } else if(currentSum < sum) {
+                    second++;
+                } else {
+                    third--;
+                }
+            }
+        }
 
-    private void change_button(int idval, int oddeven){
+    return false;
 
+    }
+
+    private void change_button(int idval, int oddeven, String addr_button){
+
+        int coord = Integer.valueOf(addr_button.substring(1)); //Only have the coordinate value of the Tic Tac Toe
         Button changePic = (Button)findViewById(idval);
 
         if (oddeven%2== 0){
             changePic.setBackgroundResource(R.drawable.molang_o);
             changePic.setClickable(false);
+            save_O.add(coord);
         }
         else{
             changePic.setBackgroundResource(R.drawable.molang_x);
             changePic.setClickable(false);
+            save_X.add(coord);
         }
 
     }
