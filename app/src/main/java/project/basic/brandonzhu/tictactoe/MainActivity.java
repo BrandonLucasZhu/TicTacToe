@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private String addr_button;
     public int count;
     private ArrayList<Integer> save_id = new ArrayList<Integer>();
-    private int[] save_O = new int [9];
-    private int[] save_X = new int [9];
+    private ArrayList<Integer> save_o = new ArrayList<Integer>();
+    private ArrayList<Integer> save_x = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //numb1.setOnClickListener(this);
 
        // String buttonText = b.getText().toString();
-        Button buttons[] = new Button[9];
+        Button buttons[] = new Button[10];
 
         for(int i=1; i<10; i++) { //Implement magic square
            // for (int j = 0; j < 3; j++) {
@@ -53,15 +56,21 @@ public class MainActivity extends AppCompatActivity {
                         if (count>8){
                             count=0;
                             reset(save_id);
+                            save_o.clear();
+                            save_x.clear();
                         }
-
-                        if (find3numbers(save_O)){
+                        else if (checkWinner(save_o)) {
                             Toast.makeText(context,"Winner",1).show();
+                            reset(save_id);
+                            save_o.clear();
+                            count = 0;
                         }
-                        else if (find3numbers(save_X)){
+                        else if (checkWinner(save_x)) {
                             Toast.makeText(context,"Winner",1).show();
+                            reset(save_id);
+                            save_x.clear();
+                            count = 0;
                         }
-
                         //Log.i("hi",getResources().getResourceEntryName(v.getId()));
                         //Toast.makeText(context,v.getId(),1).show();
                     }
@@ -69,6 +78,36 @@ public class MainActivity extends AppCompatActivity {
             }
 
     }
+
+
+    private Boolean checkWinner(ArrayList<Integer> x_or_o){
+        int[][] win_condi = {{8,1,6},{3,5,7},{4,9,2},{8,3,4},{1,5,9},{6,7,2},{8,5,2},{4,5,6}};
+        int count_xo= 0;
+
+
+        for (int set = 0; set < win_condi.length; set++) {
+
+            for (int pos = 0; pos < 3; pos++) {
+                int current = win_condi[set][pos];
+                for (int i = 0; i < x_or_o.size(); i++) {
+                    if (current == x_or_o.get(i)) {
+
+                        Log.i("hi", String.valueOf(current));
+                        count_xo++;
+                    }
+                }
+            }
+            if (count_xo == 3) {
+                return true;
+            }
+            count = 0;
+        }
+
+        return false;
+    }
+
+
+
 
     private void reset (ArrayList<Integer> array_buttons) {
         for (int j = 0; j < array_buttons.size(); j++) {
@@ -79,44 +118,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private boolean find3numbers(int [] array_search ){
-        Arrays.sort(array_search);
-        int k = 15;
-        for(int first = 0; first < array_search.length()-2; first++) {
-            int second = first+1;
-            int third = array_search.size()-1;
-            int sum = k - array_search.get(first);
-            while(second < third) {
-                int currentSum = array_search.get(second) + array_search.get(third);
 
-                if(currentSum == sum) {
-                    return true;
-                } else if(currentSum < sum) {
-                    second++;
-                } else {
-                    third--;
-                }
-            }
-        }
+    private void change_button(int idval, int oddeven, String location){
 
-    return false;
 
-    }
-
-    private void change_button(int idval, int oddeven, String addr_button){
-
-        int coord = Integer.valueOf(addr_button.substring(1)); //Only have the coordinate value of the Tic Tac Toe
         Button changePic = (Button)findViewById(idval);
 
         if (oddeven%2== 0){
             changePic.setBackgroundResource(R.drawable.molang_o);
             changePic.setClickable(false);
-            save_O.add(coord);
+            save_o.add(Integer.valueOf(location.substring(1)));
         }
         else{
             changePic.setBackgroundResource(R.drawable.molang_x);
             changePic.setClickable(false);
-            save_X.add(coord);
+            save_x.add(Integer.valueOf(location.substring(1)));
         }
 
     }
