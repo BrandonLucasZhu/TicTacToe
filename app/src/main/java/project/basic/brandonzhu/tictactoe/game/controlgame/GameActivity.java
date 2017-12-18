@@ -18,7 +18,10 @@ public class GameActivity extends AppCompatActivity {
     public int count;
     private TicTacToe tictactoe;
 
-    public void viewBoard(new)
+    public void viewBoard(TicTacToe gameModel){
+        tictactoe = gameModel;
+
+    }
 
 
 
@@ -41,6 +44,7 @@ public class GameActivity extends AppCompatActivity {
                 int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
                 buttons[i] = ((Button) findViewById(resID));
                 buttons[i].setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
                         Context context = getApplicationContext();
