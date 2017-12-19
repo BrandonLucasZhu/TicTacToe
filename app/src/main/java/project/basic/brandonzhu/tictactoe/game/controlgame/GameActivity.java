@@ -1,13 +1,12 @@
 package project.basic.brandonzhu.tictactoe.game.controlgame;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 import project.basic.brandonzhu.tictactoe.game.modelgamelogic.TicTacToe;
-import java.util.ArrayList;
 
 import project.basic.brandonzhu.tictactoe.R;
 
@@ -17,12 +16,31 @@ public class GameActivity extends AppCompatActivity {
     private String addr_button;
     public int count;
     private TicTacToe tictactoe;
+    private Button[][] buttons = new Button[3][3];
 
-    public void viewBoard(TicTacToe gameModel){
+    public void viewBoard(TicTacToe gameModel) {
         tictactoe = gameModel;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String buttonID = "t" + i + j;
+                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+                buttons[i][j] = ((Button) findViewById(resID));
+                buttons[i][j].setOnClickListener(new View.OnClickListener() {
 
+                    @Override
+                    public void onClick(View v) {
+                        Context context = getApplicationContext();
+                        //getResources().getResourceEntryName(v.getId())
+                        addr_button = getResources().getResourceEntryName(v.getId());
+                        // change_button(v.getId(),count,addr_button);
+
+                        //Log.i("hi",getResources().getResourceEntryName(v.getId()));
+                        //Toast.makeText(context,v.getId(),1).show();
+                    }
+                });
+            }
+        }
     }
-
 
 
 
@@ -30,33 +48,14 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.GameActivity);
 
         //Button numb1 = ((Button)this.findViewById(R.id.b));
         //numb1.setOnClickListener(this);
 
        // String buttonText = b.getText().toString();
-        Button buttons[] = new Button[9];
 
-        for(int i = 0; i < 9; i++) { //Implement magic square
-           // for (int j = 0; j < 3; j++) {
-                String buttonID = "t" + i;
-                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
-                buttons[i] = ((Button) findViewById(resID));
-                buttons[i].setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        Context context = getApplicationContext();
-                        //getResources().getResourceEntryName(v.getId())
-                        addr_button = getResources().getResourceEntryName(v.getId());
-                       // change_button(v.getId(),count,addr_button);
-
-                        //Log.i("hi",getResources().getResourceEntryName(v.getId()));
-                        //Toast.makeText(context,v.getId(),1).show();
-                    }
-                });
-            }
 
     }
 
