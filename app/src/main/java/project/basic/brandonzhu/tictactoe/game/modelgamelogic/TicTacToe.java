@@ -10,6 +10,8 @@ public class TicTacToe {
     private Player user;
     private int turnCounter = 0;
     private String turn;
+    private int rowX, rowO, columnX, columnO;
+
 
     private enum Player{
         X,O,NA
@@ -28,7 +30,7 @@ public class TicTacToe {
         return board[i][j];
     }
 
-    public Player setMove(int i, int j, Player user) {
+    public void setMove(int i, int j, Player user) {
         board[i][j] = user;
     }
 
@@ -39,7 +41,7 @@ public class TicTacToe {
 
     public boolean check_winner(){
         boolean winner = false;
-        int rowX, rowO, columnX, columnO;
+
 
         for (int x = 0; x <board.length; x++){
         //Check column and row

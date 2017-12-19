@@ -30,35 +30,32 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Context context = getApplicationContext();
-                        //getResources().getResourceEntryName(v.getId())
-                        addr_button = getResources().getResourceEntryName(v.getId());
-                        // change_button(v.getId(),count,addr_button);
 
-                        //Log.i("hi",getResources().getResourceEntryName(v.getId()));
-                        //Toast.makeText(context,v.getId(),1).show();
+                        addr_button = getResources().getResourceEntryName(v.getId());
+
+
                     }
                 });
             }
         }
+
+    }
+
+    public void setButton(){
+
     }
 
 
 
-
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.GameActivity);
-
-        //Button numb1 = ((Button)this.findViewById(R.id.b));
-        //numb1.setOnClickListener(this);
-
-       // String buttonText = b.getText().toString();
-
+        setContentView(R.layout.game_activity);
 
 
     }
-
+*/
 
 
 
