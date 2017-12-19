@@ -30,9 +30,8 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Context context = getApplicationContext();
-
                         addr_button = getResources().getResourceEntryName(v.getId());
-
+                        setButton(addr_button);
 
                     }
                 });
@@ -41,7 +40,15 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    public void setButton(){
+    public void setButton(String button){
+        button.substring(1);
+        int first_index = Integer.parseInt(button.charAt(0));
+        int second_index = Integer.parseInt(button.charAt(1));
+       // tictactoe.setMove(first_index,second_index, );
+
+        //if (tictactoe.check_winner()){
+            //Winner
+       // }
 
     }
 
@@ -52,7 +59,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
-
 
     }
 */

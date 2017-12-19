@@ -24,14 +24,18 @@ public class TicTacToe {
                 board[i][j] = Player.NA;
             }
         }
+        rowX = 0;
+        rowO = 0;
+        columnX = 0;
+        columnO = 0;
     }
 
     public Player getBoardPoint(int i, int j){
         return board[i][j];
     }
 
-    public void setMove(int i, int j, Player user) {
-        board[i][j] = user;
+    public void setMove(int i, int j, String XO) {
+        //board[i][j];
     }
 
     public void playerTurn(){
