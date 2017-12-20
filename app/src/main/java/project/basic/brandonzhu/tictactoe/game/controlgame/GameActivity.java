@@ -41,10 +41,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void setButton(String button){
-        button.substring(1);
-        int first_index = Integer.parseInt(button.charAt(0));
-        int second_index = Integer.parseInt(button.charAt(1));
-       // tictactoe.setMove(first_index,second_index, );
+        String coord = button.substring(1);
+        int first_index = Character.getNumericValue(coord.charAt(0)); //Get the id of the button and split the id into two coordinates i and j
+        int second_index = Character.getNumericValue(coord.charAt(1));
+        tictactoe.setMove(first_index,second_index);
 
         //if (tictactoe.check_winner()){
             //Winner
@@ -54,14 +54,14 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-/*
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
 
     }
-*/
+
 
 
 
@@ -77,8 +77,8 @@ public class GameActivity extends AppCompatActivity {
     }
 */
 
-/*
-    private void change_button(int idval, int oddeven, String location){
+
+    private void changeButton(int idval, String location){
 
 
         Button changePic = (Button)findViewById(idval);
@@ -86,17 +86,19 @@ public class GameActivity extends AppCompatActivity {
         if (oddeven%2== 0){
             changePic.setBackgroundResource(R.drawable.molang_o);
             changePic.setClickable(false);
-            save_o.add(Integer.valueOf(location.substring(1)));
+          //  save_o.add(Integer.valueOf(location.substring(1)));
         }
         else{
             changePic.setBackgroundResource(R.drawable.molang_x);
             changePic.setClickable(false);
-            save_x.add(Integer.valueOf(location.substring(1)));
+           // save_x.add(Integer.valueOf(location.substring(1)));
         }
 
     }
 
-*/
+    private void winner(){
+
+    }
 
 
 

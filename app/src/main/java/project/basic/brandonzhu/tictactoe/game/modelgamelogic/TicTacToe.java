@@ -15,6 +15,7 @@ public class TicTacToe {
 
     private enum Player{
         X,O,NA
+
     }
 
     private TicTacToe(){
@@ -34,8 +35,16 @@ public class TicTacToe {
         return board[i][j];
     }
 
-    public void setMove(int i, int j, String XO) {
-        //board[i][j];
+    public void setMove(int i, int j) {
+        playerTurn();
+        if (turn.equals("X")){
+            board[i][j] = Player.X;
+        }
+        else{
+            board[i][j] = Player.O;
+        }
+        turnCounter++;
+
     }
 
     public void playerTurn(){
