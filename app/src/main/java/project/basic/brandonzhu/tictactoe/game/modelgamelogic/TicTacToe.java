@@ -8,27 +8,25 @@ public class TicTacToe {
 
     private Player[][] board = new Player[3][3];
     private Player user;
-    private int turnCounter = 0;
-    private String turn;
-    private int rowX, rowO, columnX, columnO;
+    public int turnCounter = 0;
+    public String turn;
 
 
-    private enum Player{
-        X,O,NA
+
+    private enum Player {
+        X, O, NA
+
 
     }
 
-    private TicTacToe(){
+    public TicTacToe(){
 
         for (int i = 0; i<board.length; i++){
             for (int j = 0; j<board.length; j++){
                 board[i][j] = Player.NA;
             }
         }
-        rowX = 0;
-        rowO = 0;
-        columnX = 0;
-        columnO = 0;
+
     }
 
     public Player getBoardPoint(int i, int j){
@@ -36,8 +34,8 @@ public class TicTacToe {
     }
 
     public void setMove(int i, int j) {
-        playerTurn();
-        if (turn.equals("X")){
+
+        if (getPlayerTurn().equals("X")){
             board[i][j] = Player.X;
         }
         else{
@@ -47,41 +45,68 @@ public class TicTacToe {
 
     }
 
-    public void playerTurn(){
-        turn = (turnCounter%2 == 0)?"X":"O";
+    public String getPlayerTurn(){
+        return turn = (turnCounter%2 == 0)?"X":"O";
     }
 
 
     public boolean check_winner(){
         boolean winner = false;
-
+        int rowX = 0, rowO = 0, columnX = 0, columnO = 0;
 
         for (int x = 0; x <board.length; x++){
         //Check column and row
             for (int i = 0; i < board.length; i++) {
-                if (board[x][i].equals(Player.X.toString())){
+                if (board[x][i] == Player.X){
                     rowX++;
                 }
-                else if(board[x][i].equals(Player.O.toString())){
+                else if(board[x][i] == Player.O){
                     rowO++;
                 }
-                else if (board[i][x].equals(Player.X.toString())){
+                else if (board[i][x] == Player.X){
                     columnX++;
                 }
-                else if (board[i][x].equals(Player.O.toString())){
+                else if (board[i][x] == Player.O){
                     columnO++;
                 }
             }
+
+            if (rowX == 3){
+                winner = true;
+
+            }
+            else if (columnX == 3){
+                winner = true;
+
+            }
+            else if (rowO == 3){
+                winner = true;
+
+            }
+            else if (columnO == 3){
+                winner = true;
+            }
+
+            rowX = 0;
+            rowO = 0;
+            columnO = 0;
+            columnX = 0;
+
         }
 
-        if (rowX == 3 || columnX == 3 || rowO == 3 || columnO == 3){
-            winner = true;
-        }
+
+
         //Check diagonal
-        if (board[0][0].equals(board[1][1]) && board[1][1].equals(board[2][2])){
+        if (board[0][0] == Player.X  && board[1][1] == Player.X && board[2][2] == Player.X){
             winner = true;
         }
-        else if (board[2][0].equals(board[1][1]) && board[1][1].equals(board[0][2])){
+        else if (board[0][0] == Player.O  && board[1][1] == Player.O && board[2][2] == Player.O){
+            winner = true;
+        }
+        else if (board[0][2] == Player.X && board[1][1] == Player.X && board[2][0] == Player.X){
+            winner = true;
+        }
+        else if (board[0][2] == Player.O  && board[1][1] == Player.O && board[2][0] == Player.O){
             winner = true;
         }
 

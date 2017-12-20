@@ -1,10 +1,15 @@
 package project.basic.brandonzhu.tictactoe.game.controlgame;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 
 import project.basic.brandonzhu.tictactoe.game.modelgamelogic.TicTacToe;
 
@@ -13,40 +18,56 @@ import project.basic.brandonzhu.tictactoe.R;
 
 public class GameActivity extends AppCompatActivity {
 
-    private String addr_button;
-    public int count;
-    private TicTacToe tictactoe;
-    private Button[][] buttons = new Button[3][3];
+    private TicTacToeView visualBoard;
+    public TicTacToe gameModel = new TicTacToe();
 
-    public void viewBoard(TicTacToe gameModel) {
-        tictactoe = gameModel;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                String buttonID = "t" + i + j;
-                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
-                buttons[i][j] = ((Button) findViewById(resID));
-                buttons[i][j].setOnClickListener(new View.OnClickListener() {
+    private class TicTacToeView {
+        private String addrButton;
+        private TicTacToe tictactoeBoard;
+        private Button[][] buttons = new Button[3][3];
 
-                    @Override
-                    public void onClick(View v) {
-                        Context context = getApplicationContext();
-                        addr_button = getResources().getResourceEntryName(v.getId());
-                        setButton(addr_button);
 
-                    }
-                });
+        public void viewBoard(TicTacToe gameModel) {
+            tictactoeBoard = gameModel;
+
+
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+
+
+                    String buttonID = "t" + i + j;
+                    int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+                    buttons[i][j] = ((Button) findViewById(resID));
+                    buttons[i][j].setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+
+                            Context context = getApplicationContext();
+                            addrButton = getResources().getResourceEntryName(v.getId());
+
+                            Log.d("hi", "hi");
+
+                            setButton(tictactoeBoard,addrButton,v);
+                            if (tictactoeBoard.check_winner()){
+                                Toast.makeText(context, "This is my Toast message!", Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+                    });
+                }
             }
         }
-
     }
 
-    public void setButton(String button){
-        String coord = button.substring(1);
-        int first_index = Character.getNumericValue(coord.charAt(0)); //Get the id of the button and split the id into two coordinates i and j
-        int second_index = Character.getNumericValue(coord.charAt(1));
-        tictactoe.setMove(first_index,second_index);
-
-        //if (tictactoe.check_winner()){
+    public void setButton(TicTacToe board, String location, View button){
+        String coord = location.substring(1);
+        int firstIndex = Character.getNumericValue(coord.charAt(0)); //Get the id of the button and split the id into two coordinates i and j
+        int secondIndex = Character.getNumericValue(coord.charAt(1));
+        board.setMove(firstIndex,secondIndex);
+        changeButton(board,button);
+        //board.getBoardPoint()
+        //if (tictactoe.checkWinner()){
             //Winner
        // }
 
@@ -60,6 +81,19 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
 
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        setUp();
+    }
+
+    public void setUp(){
+        visualBoard = new TicTacToeView();
+        visualBoard.viewBoard(gameModel);
     }
 
 
@@ -78,12 +112,12 @@ public class GameActivity extends AppCompatActivity {
 */
 
 
-    private void changeButton(int idval, String location){
+    private void changeButton(TicTacToe board,View idval){
 
 
-        Button changePic = (Button)findViewById(idval);
+        Button changePic = (Button)findViewById(idval.getId());
 
-        if (oddeven%2== 0){
+        if (board.getPlayerTurn()== "O"){
             changePic.setBackgroundResource(R.drawable.molang_o);
             changePic.setClickable(false);
           //  save_o.add(Integer.valueOf(location.substring(1)));
@@ -96,7 +130,7 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void winner(){
+    private void checkWinner(){
 
     }
 
