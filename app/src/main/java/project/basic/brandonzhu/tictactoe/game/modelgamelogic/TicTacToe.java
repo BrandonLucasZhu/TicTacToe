@@ -63,7 +63,7 @@ public class TicTacToe {
                 else if(board[x][i] == Player.O){
                     rowO++;
                 }
-                else if (board[i][x] == Player.X){
+                if (board[i][x] == Player.X){
                     columnX++;
                 }
                 else if (board[i][x] == Player.O){
@@ -71,20 +71,9 @@ public class TicTacToe {
                 }
             }
 
-            if (rowX == 3){
+            if (rowX == 3 || columnX == 3 || rowO == 3 || columnO == 3){
                 winner = true;
 
-            }
-            else if (columnX == 3){
-                winner = true;
-
-            }
-            else if (rowO == 3){
-                winner = true;
-
-            }
-            else if (columnO == 3){
-                winner = true;
             }
 
             rowX = 0;
