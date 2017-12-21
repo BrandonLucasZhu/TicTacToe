@@ -119,8 +119,6 @@ public class GameActivity extends AppCompatActivity {
         super.onPause();
 
 
-        hideWinnerPopup();
-
 
     }
 
@@ -174,7 +172,6 @@ public class GameActivity extends AppCompatActivity {
             winnerWindow.setContentView(winnerPopup);
         }
 
-
         winnerWindow.showAtLocation(findViewById(R.id.activity_main), Gravity.CENTER, 0, 0); //Get id of room xml game_activity show popup in the center
 
         //Get display metrics of the screen
@@ -207,7 +204,6 @@ public class GameActivity extends AppCompatActivity {
 
         }
 
-
         animView.setBackgroundResource(spritesId);
         AnimationDrawable winnerAnimation = (AnimationDrawable) animView.getBackground();
         winnerAnimation.start();
@@ -222,16 +218,11 @@ public class GameActivity extends AppCompatActivity {
             }
 
         }, 5000);
-
-
-
     }
 
-    private void hideWinnerPopup(){
-        if (winnerWindow == null && winnerWindow.isShowing()) {
-            winnerWindow.dismiss();
-        }
-    }
+
+
+
 
 
 
