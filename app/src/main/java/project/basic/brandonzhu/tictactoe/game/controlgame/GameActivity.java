@@ -1,15 +1,29 @@
 package project.basic.brandonzhu.tictactoe.game.controlgame;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import project.basic.brandonzhu.tictactoe.game.modelgamelogic.TicTacToe;
 
@@ -20,6 +34,8 @@ public class GameActivity extends AppCompatActivity {
 
     private TicTacToeView visualBoard;
     public TicTacToe gameModel = new TicTacToe();
+    private PopupWindow winnerWindow;
+    private Toast popUpMess;
 
     private class TicTacToeView {
         private String addrButton;
@@ -48,12 +64,18 @@ public class GameActivity extends AppCompatActivity {
                             Log.d("hi", "hi");
 
                             setButton(tictactoeBoard,addrButton,v);
-                            if (tictactoeBoard.check_winner()){
+                            if (tictactoeBoard.check_winner() != "tie"){ //Display winner if no tie
+                                popUpMess = Toast.makeText(getApplicationContext(), "We have a winner!", 50000);
+                                popUpMess.show();
+                                showWinnerPopUp(tictactoeBoard);
                                 tictactoeBoard.reset();
                                 resetGraphics();
-                                Toast.makeText(context, "We have a winner!", Toast.LENGTH_LONG).show();
+
                             }
                             else if (tictactoeBoard.tie()){
+                                popUpMess = Toast.makeText(getApplicationContext(), "We have a tie!", 5000);
+                                popUpMess.show();
+                                showWinnerPopUp(tictactoeBoard);
                                 resetGraphics();
                             }
 
@@ -91,6 +113,18 @@ public class GameActivity extends AppCompatActivity {
         setUp();
     }
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+
+        hideWinnerPopup();
+
+
+    }
+
+
     public void setUp(){
         visualBoard = new TicTacToeView();
         visualBoard.viewBoard(gameModel);
@@ -121,20 +155,82 @@ public class GameActivity extends AppCompatActivity {
         Button changePic = (Button)findViewById(idval.getId());
 
         if (board.getPlayerTurn()== "O"){
-            changePic.setBackgroundResource(R.drawable.molang_o);
+            changePic.setBackgroundResource(R.drawable.molang_o); //Change button texture and set button unclickable
             changePic.setClickable(false);
-          //  save_o.add(Integer.valueOf(location.substring(1)));
+
         }
         else{
             changePic.setBackgroundResource(R.drawable.molang_x);
             changePic.setClickable(false);
-           // save_x.add(Integer.valueOf(location.substring(1)));
+
         }
 
     }
 
-    private void checkWinner(){
+    private void showWinnerPopUp(TicTacToe checkBoard){
+        if (winnerWindow == null) {
+            View winnerPopup = getLayoutInflater().inflate(R.layout.winner, null);
+            winnerWindow = new PopupWindow(this);
+            winnerWindow.setContentView(winnerPopup);
+        }
 
+
+        winnerWindow.showAtLocation(findViewById(R.id.activity_main), Gravity.CENTER, 0, 0); //Get id of room xml game_activity show popup in the center
+
+        //Get display metrics of the screen
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int imageSize = (int) (metrics.widthPixels * 0.6);
+        int textSize = (int) (metrics.widthPixels * 0.1);
+
+        //resize the pop up window
+        winnerWindow.update(0, 0, imageSize, imageSize + textSize);
+
+        ImageView animView = (ImageView) winnerWindow.getContentView().findViewById(R.id.winner_image);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(imageSize, imageSize);
+        animView.setLayoutParams(lp);
+
+        TextView animText = (TextView) winnerWindow.getContentView().findViewById(R.id.winner_text);
+
+
+
+
+
+        int spritesId;
+        if (checkBoard.check_winner() == "X_WIN") {
+            spritesId = R.layout.winner_molangs;
+
+        } else if (checkBoard.check_winner() == "O_WIN") {
+            spritesId = R.layout.winner_bolangs;
+
+        } else {
+            spritesId = R.layout.winner_tie;
+
+        }
+
+
+        animView.setBackgroundResource(spritesId);
+        AnimationDrawable winnerAnimation = (AnimationDrawable) animView.getBackground();
+        winnerAnimation.start();
+
+
+        final Handler handler  = new Handler();
+        handler.postDelayed(new Runnable() { //display popup for only a couple of seconds
+
+            @Override
+            public void run() {
+                winnerWindow.dismiss();
+            }
+
+        }, 5000);
+
+
+
+    }
+
+    private void hideWinnerPopup(){
+        if (winnerWindow == null && winnerWindow.isShowing()) {
+            winnerWindow.dismiss();
+        }
     }
 
 

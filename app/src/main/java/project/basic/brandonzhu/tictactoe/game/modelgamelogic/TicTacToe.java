@@ -10,6 +10,7 @@ public class TicTacToe {
     private Player user;
     public int turnCounter = 0;
     public String turn;
+    private String winner;
 
 
 
@@ -50,8 +51,8 @@ public class TicTacToe {
     }
 
 
-    public boolean check_winner(){
-        boolean winner = false;
+    public String check_winner(){
+        winner = "tie";
         int rowX = 0, rowO = 0, columnX = 0, columnO = 0;
 
         for (int x = 0; x <board.length; x++){
@@ -71,9 +72,12 @@ public class TicTacToe {
                 }
             }
 
-            if (rowX == 3 || columnX == 3 || rowO == 3 || columnO == 3){
-                winner = true;
+            if (rowX == 3 || columnX == 3){
+                winner = "X_WIN";
 
+            }
+            else if (rowO == 3 || columnO == 3){
+                winner = "O_WIN";
             }
 
             rowX = 0;
@@ -84,16 +88,16 @@ public class TicTacToe {
 
         //Check diagonal
         if (board[0][0] == Player.X  && board[1][1] == Player.X && board[2][2] == Player.X){
-            winner = true;
+            winner = "X_WIN";
         }
         else if (board[0][0] == Player.O  && board[1][1] == Player.O && board[2][2] == Player.O){
-            winner = true;
+            winner = "O_WIN";
         }
         else if (board[0][2] == Player.X && board[1][1] == Player.X && board[2][0] == Player.X){
-            winner = true;
+            winner = "X_WIN";
         }
         else if (board[0][2] == Player.O  && board[1][1] == Player.O && board[2][0] == Player.O){
-            winner = true;
+            winner = "O_WIN";
         }
 
     return winner;

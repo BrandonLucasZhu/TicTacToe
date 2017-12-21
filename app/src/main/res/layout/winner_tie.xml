@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <item
+        android:drawable="@drawable/winner_tie_1"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_2"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_3"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_4"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_5"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_6"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_7"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_8"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_9"
+        android:duration="200"/>
+    <item
+        android:drawable="@drawable/winner_tie_10"
+        android:duration="200"/>
+
+</animation-list>
