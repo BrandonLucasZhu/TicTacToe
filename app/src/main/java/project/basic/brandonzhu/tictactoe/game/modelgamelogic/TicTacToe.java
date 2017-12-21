@@ -80,10 +80,7 @@ public class TicTacToe {
             rowO = 0;
             columnO = 0;
             columnX = 0;
-
         }
-
-
 
         //Check diagonal
         if (board[0][0] == Player.X  && board[1][1] == Player.X && board[2][2] == Player.X){
@@ -103,6 +100,22 @@ public class TicTacToe {
     }
 
 
+    public void reset(){
+        for (int i = 0; i<board.length; i++){
+            for (int j = 0; j<board.length; j++){
+                board[i][j] = Player.NA;
+            }
+        }
+        turnCounter = 0;
+    }
+
+    public boolean tie(){
+        if (turnCounter == 9){
+            reset();
+            return true;
+        }
+        return false;
+    }
 
 
 

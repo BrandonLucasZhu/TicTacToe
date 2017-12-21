@@ -34,7 +34,6 @@ public class GameActivity extends AppCompatActivity {
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
 
-
                     String buttonID = "t" + i + j;
                     int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
                     buttons[i][j] = ((Button) findViewById(resID));
@@ -50,9 +49,14 @@ public class GameActivity extends AppCompatActivity {
 
                             setButton(tictactoeBoard,addrButton,v);
                             if (tictactoeBoard.check_winner()){
-                                Toast.makeText(context, "This is my Toast message!", Toast.LENGTH_LONG).show();
-
+                                tictactoeBoard.reset();
+                                resetGraphics();
+                                Toast.makeText(context, "We have a winner!", Toast.LENGTH_LONG).show();
                             }
+                            else if (tictactoeBoard.tie()){
+                                resetGraphics();
+                            }
+
                         }
                     });
                 }
@@ -66,10 +70,7 @@ public class GameActivity extends AppCompatActivity {
         int secondIndex = Character.getNumericValue(coord.charAt(1));
         board.setMove(firstIndex,secondIndex);
         changeButton(board,button);
-        //board.getBoardPoint()
-        //if (tictactoe.checkWinner()){
-            //Winner
-       // }
+
 
     }
 
@@ -87,7 +88,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
         setUp();
     }
 
@@ -99,17 +99,20 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-/*
 
 
-    private void reset (ArrayList<Integer> array_buttons) {
-        for (int j = 0; j < array_buttons.size(); j++) {
-            Button reset = (Button) findViewById(array_buttons.get(j));
-            reset.setBackgroundResource(R.drawable.molang_neutral);
-            reset.setClickable(true);
+
+    private void resetGraphics () {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String buttonID = "t" + i + j;
+                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+                Button reset = (Button) findViewById(resID);
+                reset.setBackgroundResource(R.drawable.molang_neutral);
+                reset.setClickable(true);
+            }
         }
     }
-*/
 
 
     private void changeButton(TicTacToe board,View idval){
