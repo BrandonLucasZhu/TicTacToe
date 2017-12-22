@@ -176,11 +176,12 @@ public class GameActivity extends AppCompatActivity {
 
         //Get display metrics of the screen
         DisplayMetrics metrics = getResources().getDisplayMetrics();
+
         int imageSize = (int) (metrics.widthPixels * 0.6);
         int textSize = (int) (metrics.widthPixels * 0.1);
 
         //resize the pop up window
-        winnerWindow.update(0, 0, imageSize, imageSize + textSize);
+        //winnerWindow.update(findViewById(R.id.activity_main),0, 0, imageSize, imageSize + textSize);
 
         ImageView animView = (ImageView) winnerWindow.getContentView().findViewById(R.id.winner_image);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(imageSize, imageSize);
