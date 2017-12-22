@@ -1,3 +1,5 @@
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -6,10 +8,14 @@
     android:background="@drawable/scenic_background"
     >
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
+        android:fontFamily="@font/pangolin"
+        android:textStyle="normal"
         android:text="@string/main_menu_title"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
@@ -32,12 +38,6 @@
             android:gravity="center_horizontal"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:paddingTop="@dimen/abc_dialog_padding_top_material"
-        android:paddingBottom="@dimen/abc_dialog_padding_top_material"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -52,7 +52,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Play!"/>
+                android:fontFamily="@font/pangolin"
+                android:textStyle="normal"
+                android:text="Play!"
+                android:background ="@drawable/button_colour"
+                />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

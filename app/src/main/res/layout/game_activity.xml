@@ -20,12 +20,14 @@
         >
 
         <!--Row 1-->
-        <TableRow>
-
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:baselineAligned="false">
             <Button
                 android:id="@+id/t00"
-                android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_width="100dp"
                 android:textSize="22sp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/molang_neutral"
@@ -36,8 +38,8 @@
 
             <Button
                 android:id="@+id/t01"
-                android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_width="100dp"
                 android:textSize="22sp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/molang_neutral"
@@ -48,8 +50,8 @@
 
             <Button
                 android:id="@+id/t02"
-                android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_width="100dp"
                 android:textSize="22sp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/molang_neutral"
@@ -65,8 +67,8 @@
 
             <Button
                 android:id="@+id/t10"
-                android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_width="100dp"
                 android:textSize="22sp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/molang_neutral"
@@ -77,8 +79,8 @@
 
             <Button
                 android:id="@+id/t11"
-                android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_width="100dp"
                 android:textSize="22sp"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/molang_neutral"
